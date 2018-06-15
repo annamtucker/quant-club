@@ -1,2 +1,1 @@
-# quant-club
-miscellaneous code and tutorials 
+Miscellaneous code and tutorials from AU SFWS S.Q.U.A.D. 
