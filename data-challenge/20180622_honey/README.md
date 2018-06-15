@@ -12,4 +12,4 @@ This data was collected by the USDA and contains 8 columns:
 * prodvalue = total value of produced honey ($)  
 * year  
   
-Happy plotting! :honeybee: :honeypot: :honeybee: :honeypot: :honeybee: 
+Happy plotting! :honeybee: :honey_pot: :honeybee: :honey_pot: :honeybee: 
