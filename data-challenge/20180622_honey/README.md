@@ -1,6 +1,7 @@
 Data wrangling and visualization challenge for 6/22/18
 
-Data: honeyproduction.csv
+Data: honeyproduction.csv   
+More info: [Bee Culture Magazine](http://www.beeculture.com/u-s-honey-industry-report-2016/)
 
 This data was collected by the USDA and contains 8 columns:  
 * state = 2-character U.S. state abbreviation  
