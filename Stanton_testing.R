@@ -111,9 +111,14 @@ state_level_plots <- plot_grid(st_prices, st_stocks, st_prices_cv, st_stocks_cv,
 annual_level_plots <- plot_grid(ann_prices, ann_stocks, ann_prices_cv, ann_stocks_cv,
           labels = c("A", "B", "C", "D"))
 
+save_plot("state_level_plots.png", state_level_plots,
+          ncol = 2, # we're saving a grid plot of 2 columns
+          nrow = 2, # and 2 rows
+          # each individual subplot should have an aspect ratio of 1.3
+          base_aspect_ratio = 3)
+          
 save_plot("annual_level_plots.png", annual_level_plots,
           ncol = 2, # we're saving a grid plot of 2 columns
           nrow = 2, # and 2 rows
           # each individual subplot should have an aspect ratio of 1.3
-          base_aspect_ratio = 1.3
-)
+          base_aspect_ratio = 2.3)
