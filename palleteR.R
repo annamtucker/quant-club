@@ -8,12 +8,13 @@ require(paletter)
 
 # specify image path, number of colors, and type of pallete
 img = "C:/Users/Anna/Desktop/sanderling.jpg"
-ncol = 8
-type = "continuous"
+ncol = 10
+type = "categorical"
 
 pal_sand = create_palette(image_path = img,
                      number_of_colors = ncol,
                      type_of_variable = type)
+
 
 img = "C:/Users/Anna/Desktop/ruddy-turnstone.jpg"
 
