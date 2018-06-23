@@ -1,0 +1,38 @@
+library(tidyverse)
+datum=read.csv(file.choose())
+head(datum)
+
+##added additional columns latitude and region
+##honeyproducion_KAC22JUN2018.csv
+#yieldpercol~latitude
+#with random effect of year
+
+library(nlme)
+datum.lme=lme(yieldpercol~latitude,data=datum,random=~1|year)
+summary(dat.lme)
+
+##yieldpercol=81.72-0.51*latitude
+##p=0.0002
+
+#simple scatter plot
+ggplot(data = datum) + 
+  geom_point(mapping = aes(x = latitude, y = yieldpercol))
+
+#"smooth" line plot showing trend.. but lose how much data is at each point
+ggplot(data = datum) + 
+  geom_smooth(mapping = aes(x = latitude, y = yieldpercol))
+
+##map both plot types in one
+ggplot(data = datum) + 
+  geom_point(mapping = aes(x = latitude, y = yieldpercol))+
+  geom_smooth(mapping = aes(x = latitude, y = yieldpercol))
+
+##key points by U.S. region
+ggplot(data=datum,mapping=aes(x=latitude,y=yieldpercol))+
+  geom_point(mapping=aes(color=region))+
+  geom_smooth()
+
+##show trends within each region
+ggplot(data=datum)+
+  geom_smooth(
+  mapping=aes(x=latitude,y=yieldpercol,color=region))
