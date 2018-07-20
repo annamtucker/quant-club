@@ -5,10 +5,26 @@ require(tidyverse)
 require(cowplot)
 require(lubridate)
 require(datapasta)
+require(stringr)
 
 dat = read_csv("data-challenge/20180720_antiquities/actions_under_antiquities_act.csv")
 head(dat)
 str(dat)
+
+
+# clean up numbers with commas (incomplete)----
+dat %>% 
+  mutate(area_type = ifelse(str_detect(acres_affected, "sq. miles") |
+                              str_detect(acres_affected, "square miles"),
+                            T, F)) %>% 
+  arrange(-area_type) %>% 
+  select(acres_affected, area_type) 
+         
+    acres_num = str_replace_all(acres_affected, ",", ""),
+         acres_num = as.numeric(acres_num)) %>% 
+  select(acres_num)
+
+
 
 # clean up action types ----
 
