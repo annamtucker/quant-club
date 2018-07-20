@@ -36,11 +36,11 @@ classify_action = function(x){
 dat %>% 
   mutate(action_type = map_chr(action, classify_action)) -> dat_clean
 
-table(dat2$action_type)
+table(dat_clean$action_type)
 
 # how many are still unclassified?
-length(which(is.na(dat2$action_type)))
-table(dat2$action[is.na(dat2$action_type)])
+length(which(is.na(dat_clean$action_type)))
+table(dat_clean$action[is.na(dat_clean$action_type)])
 
 # I'm just going to leave those NA for now
 
@@ -290,10 +290,36 @@ dat_all %>%
   geom_line(lwd = 2, alpha = 0.7, col = "gray80") +
   geom_point(aes(col = party), size = 3, alpha = 0.9) +
   xlab("Year") +
-  ylab("Total acres")
+  ylab("Total acres protected")
 
 
-# which party added the most? ----
+# change within years, not cumulative ----
+dat_all %>% 
+  mutate(acres_affected = as.numeric(acres_affected),
+         acre_change = ifelse(action_type == "Diminished", -1*acres_affected,
+                              ifelse(action_type %in% c("Redesignated", "Transferred"), 0, acres_affected))) %>% 
+  group_by(year, party) %>% 
+  summarize(yr_change = sum(acre_change, na.rm = T)) %>% 
+  filter(!is.na(year)) %>%
+  ggplot(aes(x = as.character(year), y = yr_change)) +
+  geom_linerange(lwd = 2, alpha = 0.25, ymin = 0, 
+                 aes(ymax = yr_change, col = party)) +
+  geom_point(aes(col = party), size = 3, alpha = 0.9) +
+  xlab("Year") +
+  ylab("Change in protected area (acres)") +
+  scale_color_manual(values = c("dodgerblue4", 
+                                "palegreen4",
+                                "red3"),
+                     labels = c("Democrat",
+                                "Other",
+                                "Republican"),
+                     name = "Party in power") +
+  theme(legend.position = "top",
+        axis.text.x = element_text(angle = 90, hjust = 1,
+                                   size = 10)) 
+
+
+# net change by members of each party? ----
 dat_all %>% 
   mutate(acres_affected = as.numeric(acres_affected),
          acre_change = ifelse(action_type == "Diminished", -1*acres_affected,
@@ -303,10 +329,12 @@ dat_all %>%
   group_by(party) %>% 
   summarize(tot_acres = sum(acre_change, na.rm = T)) %>% 
   ggplot(aes(x = party, y = tot_acres)) +
-  geom_bar(stat= "identity", width = 0.75) +
+  geom_bar(stat= "identity", width = 0.5, fill = "dodgerblue4", alpha = 0.6) +
   xlab("Political party in power") +
-  ylab("Total acres added") 
+  ylab("Net acres added") 
 
+
+# which decade 
 
   
   
