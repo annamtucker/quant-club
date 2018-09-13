@@ -1,3 +1,3 @@
-(list of emojis)[https://gist.github.com/rxaviers/7360908]
+[list of emojis](https://gist.github.com/rxaviers/7360908\)
 
 :smile:  
