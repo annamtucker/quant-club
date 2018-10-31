@@ -9,7 +9,7 @@
 
 ### Anna found mistakes in input parameters
 # need to change initial values may not actually change the parameter value
-require(shiny)
+
 library(shiny)
 library(shinythemes)
 
